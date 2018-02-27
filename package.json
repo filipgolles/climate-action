@@ -4,7 +4,8 @@
   "description": "Enabling climate-friendly behavior through Actions on Google",
   "main": "build/init.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "pretest": "npm run build",
+    "test": "tape test/**/*.js",
     "build": "babel src -d build -D",
     "build:production": "cross-env BABEL_ENV=production babel src -d dist -D",
     "prestart": "npm run build",
@@ -38,7 +39,20 @@
   "eslintConfig": {
     "extends": [
       "skellyton"
-    ]
+    ],
+    "overrides": {
+      "files": [
+        "test/*",
+        "tests/*"
+      ],
+      "rules": {
+        "filenames/match-regex": [
+          2,
+          "^[a-z-]+[.]test$",
+          true
+        ]
+      }
+    }
   },
   "eslintIgnore": [
     "build/",
@@ -58,8 +72,5 @@
         ]
       }
     }
-  },
-  "dependencies": {
-    "tape": "^4.9.0"
   }
 }
