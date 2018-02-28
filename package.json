@@ -2,43 +2,26 @@
   "name": "climate-action",
   "version": "0.1.0",
   "description": "Enabling climate-friendly behavior through Actions on Google",
-  "main": "build/init.js",
+  "main": "lib/init.js",
   "scripts": {
-    "build": "babel src -d build -D",
-    "prestart": "npm run build",
-    "start": "node build/init.js"
+    "start": "node lib/init.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/filipgolles/climate-action.git"
   },
-  "author":
-    "Filip Norman Golles <filip.golles@gmail.com> (https://github.com/filipgolles)",
+  "author": "Filip Norman Golles (https://github.com/filipgolles)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/filipgolles/climate-action/issues"
   },
   "homepage": "https://github.com/filipgolles/climate-action#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-plugin-transform-remove-console": "^6.9.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.18.1",
     "eslint-config-skellyton": "^2.0.0"
   },
   "eslintConfig": {
     "extends": ["skellyton/full"]
   },
-  "eslintIgnore": ["build/", "dist/"],
-  "babel": {
-    "presets": ["env", "stage-2"],
-    "plugins": [],
-    "comments": false,
-    "env": {
-      "production": {
-        "plugins": ["transform-remove-console"]
-      }
-    }
-  }
+  "eslintIgnore": ["build/", "dist/"]
 }
