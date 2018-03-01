@@ -28,12 +28,11 @@
     "eslint-config-skellyton": "^2.0.0"
   },
   "eslintConfig": {
-    "extends": [
-      "skellyton/full"
-    ]
+    "extends": ["skellyton/full"],
+    "rules": {
+      "global-require": 0,
+      "filenames/no-index": 0
+    }
   },
-  "eslintIgnore": [
-    "build/",
-    "dist/"
-  ]
+  "eslintIgnore": ["build/", "dist/"]
 }
