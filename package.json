@@ -25,14 +25,15 @@
   "devDependencies": {
     "dotenv": "^5.0.1",
     "eslint": "^4.18.1",
-    "eslint-config-skellyton": "^2.0.0"
+    "eslint-config-skellyton": "^2.2.0"
   },
   "eslintConfig": {
-    "extends": ["skellyton/full"],
-    "rules": {
-      "global-require": 0,
-      "filenames/no-index": 0
-    }
+    "extends": [
+      "skellyton/full"
+    ]
   },
-  "eslintIgnore": ["build/", "dist/"]
+  "eslintIgnore": [
+    "build/",
+    "dist/"
+  ]
 }
