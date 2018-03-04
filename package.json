@@ -4,6 +4,8 @@
   "description": "Enabling climate-friendly behavior through Actions on Google",
   "main": "lib/main.js",
   "scripts": {
+    "update":
+      "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
     "start": "node -r dotenv/config lib/main.js"
   },
   "repository": {
@@ -29,12 +31,7 @@
     "eslint-config-skellyton": "^2.2.0"
   },
   "eslintConfig": {
-    "extends": [
-      "skellyton/full"
-    ]
+    "extends": ["skellyton/full"]
   },
-  "eslintIgnore": [
-    "build/",
-    "dist/"
-  ]
+  "eslintIgnore": ["build/", "dist/"]
 }
