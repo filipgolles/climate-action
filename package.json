@@ -18,6 +18,7 @@
   "homepage": "https://github.com/filipgolles/climate-action#readme",
   "dependencies": {
     "actions-on-google": "^1.9.0",
+    "bayes": "0.0.7",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
     "request": "^2.83.0"
