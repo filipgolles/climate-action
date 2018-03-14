@@ -2,14 +2,14 @@
   "name": "climate-action",
   "version": "0.1.0",
   "description": "Enabling climate-friendly behavior through Actions on Google",
-  "main": "lib/main.js",
+  "main": "lib/core/webhook.js",
   "scripts": {
+    "test": "",
     "agent":
       "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
-    "gen": "node -r dotenv/config classifier/data-generator.js",
-    "train": "node classifier/lrc.js",
+    "train": "node lib/classifier/train.js",
     "tunnel": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
-    "start": "npm run tunnel & node -r dotenv/config lib/main.js"
+    "start": "npm run tunnel & node -r dotenv/config lib/core/webhook.js"
   },
   "repository": {
     "type": "git",
@@ -35,7 +35,6 @@
     "eslint": "^4.18.2",
     "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import": "^2.9.0",
-    "unique-random-array": "^1.0.0"
+    "eslint-plugin-import": "^2.9.0"
   }
 }
