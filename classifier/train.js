@@ -1,7 +1,7 @@
 const { LogisticRegressionClassifier } = require('natural');
 const data = require('./data');
 
-const CLASSIFIER_FILENAME = './lib/classifier/classifier.json';
+const CLASSIFIER_FILENAME = './lib/core/nlp/classifier.json';
 
 const lrc = new LogisticRegressionClassifier();
 lrc.events.once('trainedWithDocument', ob => {
