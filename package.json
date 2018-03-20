@@ -4,11 +4,15 @@
   "description": "Enabling climate-friendly behavior through Actions on Google",
   "main": "lib/core/webhook.js",
   "scripts": {
-    "test": "tape -r dotenv/config test/**/*.js | tap-spec",
-    "agent": "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
+    "newman": "newman run test/http/reqs.json -e test/http/env.json -r cli",
+    "test": "tape -r dotenv/config test/**/*.test.js | tap-dot",
+    "coverage": "nyc npm run test",
+    "agent":
+      "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
     "train": "node lib/classifier/train.js",
     "tunnel": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
-    "start": "npm run tunnel & node -r dotenv/config lib/core/webhook.js"
+    "serve": "node -r dotenv/config lib/core/webhook.js",
+    "start": "npm run tunnel & npm run serve"
   },
   "repository": {
     "type": "git",
@@ -20,6 +24,9 @@
     "url": "https://github.com/filipgolles/climate-action/issues"
   },
   "homepage": "https://github.com/filipgolles/climate-action#readme",
+  "nyc": {
+    "reporter": "text"
+  },
   "dependencies": {
     "actions-on-google": "^1.10.0",
     "express": "^4.16.3",
@@ -30,12 +37,13 @@
   },
   "devDependencies": {
     "dotenv": "^5.0.1",
-    "eslint": "^4.18.2",
+    "eslint": "^4.19.0",
     "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-import": "^2.9.0",
-    "istanbul": "^0.4.5",
-    "tap-spec": "^4.1.1",
+    "newman": "^3.9.3",
+    "nyc": "^11.6.0",
+    "tap-dot": "^1.0.5",
     "tape": "^4.9.0"
   }
 }
