@@ -4,10 +4,9 @@
   "description": "Enabling climate-friendly behavior through Actions on Google",
   "main": "lib/core/webhook.js",
   "scripts": {
-    "test": "tape test/**/*.js | tap-spec",
-    "agent":
-      "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
-    "train": "node classifier/train.js",
+    "test": "tape -r dotenv/config test/**/*.js | tap-spec",
+    "agent": "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
+    "train": "node lib/classifier/train.js",
     "tunnel": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
     "start": "npm run tunnel & node -r dotenv/config lib/core/webhook.js"
   },
@@ -27,8 +26,7 @@
     "got": "^8.3.0",
     "moment": "^2.21.0",
     "morgan": "^1.9.0",
-    "natural": "^0.5.6",
-    "request": "^2.85.0"
+    "natural": "^0.5.6"
   },
   "devDependencies": {
     "dotenv": "^5.0.1",
