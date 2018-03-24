@@ -6,11 +6,15 @@
   "scripts": {
     "test": "nyc --silent tape -r dotenv/config test/**/*.test.js | tap-spec",
     "report": "nyc report",
-    "agent": "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
-    "train": "node lib/classifier/train.js",
-    "tunnel": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
+    "prep:agent":
+      "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
+    "prep:classifier": "node lib/classifier/train.js",
+    "tunnel:open": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
+    "tunnel:close": "killall ngrok || true",
+    "preserve": "npm run tunnel:open &",
     "serve": "node -r dotenv/config lib/core/webhook.js",
-    "start": "npm run tunnel & npm run serve"
+    "postserve": "npm run tunnel:close",
+    "start": "npm run serve"
   },
   "repository": {
     "type": "git",
@@ -28,7 +32,8 @@
     "got": "^8.3.0",
     "moment": "^2.21.0",
     "morgan": "^1.9.0",
-    "natural": "^0.5.6"
+    "natural": "^0.5.6",
+    "node-rake": "^1.0.1"
   },
   "devDependencies": {
     "dotenv": "^5.0.1",
@@ -36,6 +41,7 @@
     "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-import": "^2.9.0",
+    "joi": "^13.1.2",
     "nyc": "^11.6.0",
     "supertest": "^3.0.0",
     "tap-spec": "^4.1.1",

@@ -5,7 +5,7 @@ const {
   fallback
 } = require('../../lib/core/standard-intents');
 
-test('standard-intents: MAIN', async assert => {
+test('standard-intents: MAIN', async t => {
   const mainNewKey = [ 'For weather reports', 'DEVICE_COARSE_LOCATION' ];
   const mainNew = {
     userStorage : {},
@@ -28,16 +28,15 @@ test('standard-intents: MAIN', async assert => {
     }
   };
 
+  t.plan(2);
   await main(mainNew);
-  assert.deepEqual(mainNew.res, mainNewKey, 'should ask for permissions');
+  t.deepEqual(mainNew.res, mainNewKey, 'should ask for permissions');
 
   await main(mainReturning);
-  assert.deepEqual(mainReturning.res, mainReturningKey, 'should welcome back');
-
-  assert.end();
+  t.deepEqual(mainReturning.res, mainReturningKey, 'should welcome back');
 });
 
-test('standard-intents: intent.PERMISSION', async assert => {
+test('standard-intents: intent.PERMISSION', async t => {
   const acceptKey = 'umea, got it!';
   const accept = {
     userStorage : {},
@@ -69,16 +68,18 @@ test('standard-intents: intent.PERMISSION', async assert => {
     }
   };
 
+  t.plan(2);
   await permission(accept);
-  assert.equal(accept.res, acceptKey, 'should return users location');
+  t.equal(accept.res, acceptKey, 'should return users location');
 
   await permission(decline);
-  assert.equal(decline.res, declineKey, 'should trigger abort-reponse');
+  t.equal(decline.res, declineKey, 'should trigger abort-reponse');
 
-  assert.end();
+  t.end();
 });
 
-test('standard-intents: fallback', async assert => {
+test('standard-intents: fallback', async t => {
+  t.plan(1);
   const invalidKey = 'Sorry, I don\'t understand.';
   const invalid = {
     getIntent: function() {
@@ -90,6 +91,5 @@ test('standard-intents: fallback', async assert => {
   };
 
   await fallback(invalid);
-  assert.equal(invalid.res, invalidKey, 'should trigger fallback reponse');
-  assert.end();
+  t.equal(invalid.res, invalidKey, 'should trigger fallback reponse');
 });
