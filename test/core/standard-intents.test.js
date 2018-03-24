@@ -1,7 +1,11 @@
 const test = require('tape');
-const dispatch = require('../lib/core/dispatcher');
+const {
+  main,
+  permission,
+  fallback
+} = require('../../lib/core/standard-intents');
 
-test('dispatch: intent.MAIN', async assert => {
+test('standard-intents: MAIN', async assert => {
   const mainNewKey = [ 'For weather reports', 'DEVICE_COARSE_LOCATION' ];
   const mainNew = {
     userStorage : {},
@@ -24,16 +28,16 @@ test('dispatch: intent.MAIN', async assert => {
     }
   };
 
-  await dispatch(mainNew);
+  await main(mainNew);
   assert.deepEqual(mainNew.res, mainNewKey, 'should ask for permissions');
 
-  await dispatch(mainReturning);
+  await main(mainReturning);
   assert.deepEqual(mainReturning.res, mainReturningKey, 'should welcome back');
 
   assert.end();
 });
 
-test('dispatch: intent.PERMISSION', async assert => {
+test('standard-intents: intent.PERMISSION', async assert => {
   const acceptKey = 'umea, got it!';
   const accept = {
     userStorage : {},
@@ -65,35 +69,16 @@ test('dispatch: intent.PERMISSION', async assert => {
     }
   };
 
-  await dispatch(accept);
-  assert.equal(accept.res, acceptKey, 'should return location');
+  await permission(accept);
+  assert.equal(accept.res, acceptKey, 'should return users location');
 
-  await dispatch(decline);
-  assert.equal(decline.res, declineKey, 'should return "abortion" string');
+  await permission(decline);
+  assert.equal(decline.res, declineKey, 'should trigger abort-reponse');
 
   assert.end();
 });
 
-test('dispatch: intent.TEXT', async assert => {
-  const key = 'Sorry, I don\'t understand.';
-  const action = {
-    getIntent: function() {
-      return 'actions.intent.TEXT';
-    },
-    getRawInput: function() {
-      return '';
-    },
-    ask: function(str) {
-      this.res = str;
-    }
-  };
-
-  await dispatch(action);
-  assert.equal(action.res, key, 'should return "bad intent" string');
-  assert.end();
-});
-
-test('dispatch: invalid intent', async assert => {
+test('standard-intents: fallback', async assert => {
   const invalidKey = 'Sorry, I don\'t understand.';
   const invalid = {
     getIntent: function() {
@@ -104,7 +89,7 @@ test('dispatch: invalid intent', async assert => {
     }
   };
 
-  await dispatch(invalid);
-  assert.equal(invalid.res, invalidKey, 'should return "bad intent" string');
+  await fallback(invalid);
+  assert.equal(invalid.res, invalidKey, 'should trigger fallback reponse');
   assert.end();
 });
