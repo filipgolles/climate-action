@@ -4,11 +4,9 @@
   "description": "Enabling climate-friendly behavior through Actions on Google",
   "main": "lib/core/webhook.js",
   "scripts": {
-    "test": "nyc --silent tape -r dotenv/config test/**/*.test.js | tap-spec",
-    "report": "nyc report",
     "prep:agent":
       "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
-    "prep:classifier": "node lib/classifier/train.js",
+    "prep:classifier": "node classifier/serialize.js",
     "tunnel:open": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
     "tunnel:close": "killall ngrok || true",
     "preserve": "npm run tunnel:open &",
@@ -40,11 +38,6 @@
     "eslint": "^4.19.0",
     "eslint-plugin-filenames": "^1.2.0",
     "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import": "^2.9.0",
-    "joi": "^13.1.2",
-    "nyc": "^11.6.0",
-    "supertest": "^3.0.0",
-    "tap-spec": "^4.1.1",
-    "tape": "^4.9.0"
+    "eslint-plugin-import": "^2.9.0"
   }
 }

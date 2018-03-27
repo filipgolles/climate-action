@@ -31,7 +31,7 @@
   "conversations": {
     "main-hook": {
       "name": "main-hook",
-      "url": "https://climateactions.eu.ngrok.io/climateaction",
+      "url": "https://climateactions.eu.ngrok.io/hook",
       "fulfillmentApiVersion": 2
     }
   },

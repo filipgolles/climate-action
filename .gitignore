@@ -113,5 +113,7 @@ DEPRECATED_*/
 DEPRECATED_*/*
 
 # ---------- project specific ----------
+old_*/*
+old_*/
 creds.data
 trash.txt
