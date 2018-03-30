@@ -6,16 +6,7 @@
         "name": "actions.intent.MAIN"
       },
       "fulfillment": {
-        "conversationName": "main-hook"
-      }
-    },
-    {
-      "name": "TEXT",
-      "intent": {
-        "name": "actions.intent.TEXT"
-      },
-      "fulfillment": {
-        "conversationName": "main-hook"
+        "conversationName": "hook"
       }
     },
     {
@@ -24,13 +15,22 @@
         "name": "actions.intent.PERMISSION"
       },
       "fulfillment": {
-        "conversationName": "main-hook"
+        "conversationName": "hook"
+      }
+    },
+    {
+      "name": "TEXT",
+      "intent": {
+        "name": "actions.intent.TEXT"
+      },
+      "fulfillment": {
+        "conversationName": "hook"
       }
     }
   ],
   "conversations": {
-    "main-hook": {
-      "name": "main-hook",
+    "hook": {
+      "name": "hook",
       "url": "https://climateactions.eu.ngrok.io/hook",
       "fulfillmentApiVersion": 2
     }

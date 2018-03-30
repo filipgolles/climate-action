@@ -117,3 +117,5 @@ old_*/*
 old_*/
 creds.data
 trash.txt
+quick_dev/*
+quick_dev/
