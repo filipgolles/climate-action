@@ -3,8 +3,9 @@ const got = require('got');
 const { TRAZOR_KEY, TRAZOR_ENDPOINT } = process.env;
 
 const EXCL_RELATIONS = [ 'tmod', 'det', 'num', 'poss', 'punct' ];
-const EXCL_PARTS = [ 'TO', 'VB', 'PRP' ];
-const INCL_RELATIONS = [ 'amod', 'pobj' ];
+const EXCL_PARTS = [ 'TO', 'VB', 'PRP', 'DT', 'IN' ];
+const LINK_RELATIONS = [ 'amod', 'pobj' ];
+const LINK_AVOID = ['NNS'];
 
 module.exports.extract = async function (str) {
   try {
@@ -34,7 +35,7 @@ async function extract ({ sentences, entities, relations, properties } = {}) {
   // and any 'properties', ('is-a', 'has-a' relationship between predicate and focus)
 
   const words = sentences.reduce((acc, cur) => acc.concat(cur.words), []);
-  // console.log(words);
+
   const indices = [].concat(
     words.filter(w => !w.relationToParent).map(w => w.position),
     entities
@@ -52,7 +53,7 @@ async function extract ({ sentences, entities, relations, properties } = {}) {
       }, [])
       : []
   );
-  // console.log(indices);
+
   return matchWords(words, indices);
 }
 
@@ -65,7 +66,6 @@ function matchWords (words, indices) {
         // get friend if word has link
         if (word.lnk !== null) {
           const friend = cleanup(words.find(w => w.position === word.lnk));
-
           return acc.concat(
             friend.pos > word.pos ? [ word, friend ] : [ friend, word ]
           );
@@ -100,6 +100,10 @@ function cleanup ({
     tok : token,
     lem : lemma,
     tag : partOfSpeech,
-    lnk : INCL_RELATIONS.includes(relationToParent) ? parentPosition : null
+    lnk :
+      LINK_RELATIONS.includes(relationToParent) &&
+      !LINK_AVOID.includes(partOfSpeech)
+        ? parentPosition
+        : null
   };
 }

@@ -6,8 +6,8 @@
   "scripts": {
     "dev:nlp": "node -r dotenv/config quick_dev/nlp.test.js",
     "dev:reg": "node -r dotenv/config quick_dev/reg.test.js",
-    "prep:agent":
-      "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
+    "dev:pres": "node -r dotenv/config quick_dev/pres.test.js",
+    "prep:agent": "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
     "prep:classifier": "node nlp/classifier.js",
     "tunnel:open": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
     "tunnel:close": "killall ngrok || true",
@@ -31,8 +31,7 @@
     "express": "^4.16.3",
     "got": "^8.3.0",
     "moment": "^2.22.0",
-    "natural": "^0.5.6",
-    "node-rake": "^1.0.1"
+    "natural": "^0.5.6"
   },
   "devDependencies": {
     "dotenv": "^5.0.1",
