@@ -1,4 +1,5 @@
 const got = require('got');
+const debug = require('debug')('dev:extractor');
 
 const {TRAZOR_KEY, TRAZOR_ENDPOINT} = process.env;
 
@@ -65,10 +66,16 @@ function matchWords(words, indices) {
 
         // Get friend if word has link
         if (word.lnk !== null) {
-          const friend = cleanup(words.find(w => w.position === word.lnk));
-          return acc.concat(
-            friend.pos > word.pos ? [word, friend] : [friend, word]
-          );
+          const maybeFriend = words.find(w => w.position === word.lnk);
+          if (isSignificant(maybeFriend)) {
+            const friend = cleanup(maybeFriend);
+            debug('significant friend: ', friend);
+            return acc.concat(
+              friend.pos > word.pos ? [word, friend] : [friend, word]
+            );
+          }
+
+          word.lnk = null;
         }
 
         return acc.concat(word);
@@ -77,7 +84,8 @@ function matchWords(words, indices) {
     }, [])
     .filter((cur, i, arr) => {
       return i === arr.findIndex(el => el.pos === cur.pos);
-    });
+    })
+    .sort((a, b) => a.pos - b.pos);
 }
 
 function isSignificant({relationToParent, partOfSpeech} = {}) {
@@ -102,7 +110,7 @@ function cleanup({
     tag: partOfSpeech,
     lnk:
       LINK_RELATIONS.includes(relationToParent) &&
-        !LINK_AVOID.includes(partOfSpeech) ?
+      !LINK_AVOID.includes(partOfSpeech) ?
         parentPosition :
         null
   };

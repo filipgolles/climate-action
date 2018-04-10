@@ -4,8 +4,7 @@
   "description": "Enabling climate-friendly behavior through Actions on Google",
   "main": "lib/core/webhook.js",
   "scripts": {
-    "dev:prog:reg": "node -r dotenv/config dev/progress/reg.test.js",
-    "dev:prog:pres": "node -r dotenv/config dev/progress/pres.test.js",
+    "dev:food": "DEBUG=* node -r dotenv/config lib/modules/food.js",
     "prep:agent":
       "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
     "prep:classifier": "node nlp/classifier.js",
@@ -14,7 +13,7 @@
     "preserve": "yarn tunnel:open &",
     "serve": "node -r dotenv/config lib/core/webhook.js",
     "postserve": "yarn tunnel:close",
-    "start": "yarn serve"
+    "start": "DEBUG=dev:* yarn serve"
   },
   "repository": {
     "type": "git",
@@ -28,6 +27,7 @@
   "homepage": "https://github.com/filipgolles/climate-action#readme",
   "dependencies": {
     "actions-on-google": "^1.10.0",
+    "debug": "^3.1.0",
     "express": "^4.16.3",
     "got": "^8.3.0",
     "moment": "^2.22.0",
