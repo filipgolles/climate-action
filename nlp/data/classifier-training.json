@@ -6,27 +6,30 @@
     "how long to boil eggs",
     "stir fry recipe",
     "give me the recipe for spaghetti bolognese with cheese",
-    "how to cook chicken and ketchup"
+    "how to cook chicken and ketchup",
+    "what do I need to cook"
   ],
 
   "present": [
     "how am i doing",
     "am i doing better than last week",
-    "tell me about my progress",
+    "tell me about my performance",
     "how climate friendly have i been",
     "am i doing worse than before",
     "am i doing better than last week",
-    "what\"s my progress"
+    "what's my performance",
+    "what's my score"
   ],
 
   "register": [
     "i recycled today",
-    "me and some work friends are starting a car pool.",
+    "skipped on the ham for lunch",
     "ate vegitarian today",
     "i rode my bicycle to work",
     "bought a season ticket for the bus",
     "i ate tofu instead of ham",
-    "didn\"t take the car to work today"
+    "didn't take the car to work today",
+    "i car pooled"
   ],
 
   "weather": [
@@ -35,8 +38,9 @@
     "give me the weather forecast for today",
     "is it raining outside",
     "how cold is it",
-    "what\"s the weather like later",
-    "will it ever stop raining"
+    "what's the weather like later",
+    "will it ever stop raining",
+    "can i take the bike to work?"
   ],
 
   "reset": [
