@@ -32,6 +32,8 @@ Temporary Items
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+jsconfig.json
+tsconfig.json
 
 # ---------- Node.js ----------
 # Logs
@@ -100,6 +102,10 @@ typings/
 .cache/*
 .cache/
 
+# newman logs
+newman/*
+newman
+
 # ---------- Skellyton ----------
 build/
 build/*
@@ -109,3 +115,9 @@ DEPRECATED_*/
 DEPRECATED_*/*
 
 # ---------- project specific ----------
+old_*/*
+old_*/
+creds.data
+trash.txt
+quick_dev/*
+quick_dev/

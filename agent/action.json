@@ -1,0 +1,60 @@
+{
+  "actions": [
+    {
+      "name": "MAIN",
+      "intent": {
+        "name": "actions.intent.MAIN"
+      },
+      "fulfillment": {
+        "conversationName": "hook"
+      }
+    },
+    {
+      "name": "PERMISSION",
+      "intent": {
+        "name": "actions.intent.PERMISSION"
+      },
+      "fulfillment": {
+        "conversationName": "hook"
+      }
+    },
+    {
+      "name": "TEXT",
+      "intent": {
+        "name": "actions.intent.TEXT"
+      },
+      "fulfillment": {
+        "conversationName": "hook"
+      }
+    },
+    {
+      "name": "WEATHER",
+      "intent": {
+        "name": "custom.intent.WEATHER",
+        "trigger": {
+          "queryPatterns": [
+            "ask sustainable susan about weather",
+            "forecast",
+            "about the weather",
+            "what the weather will be like",
+            "if it is going to rain",
+            "is cold outside",
+            "the weather later today",
+            "forecast for later"
+          ]
+        }
+      },
+      "fulfillment": {
+        "conversationName": "hook"
+      }
+    }
+  ],
+  "conversations": {
+    "hook": {
+      "name": "hook",
+      "url": "https://climate-actions.herokuapp.com/hook",
+      "fulfillmentApiVersion": 2
+    }
+  },
+  "locale": "en"
+}

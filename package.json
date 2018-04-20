@@ -2,9 +2,17 @@
   "name": "climate-action",
   "version": "0.1.0",
   "description": "Enabling climate-friendly behavior through Actions on Google",
-  "main": "lib/main.js",
+  "main": "lib/core/webhook.js",
   "scripts": {
-    "start": "node -r dotenv/config lib/main.js"
+    "prep:agent":
+      "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
+    "prep:classifier": "node nlp/classifier.js",
+    "prep": "yarn prep:classifier && yarn prep:agent",
+    "tunnel:open": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
+    "tunnel:close": "killall ngrok || true",
+    "prestart": "yarn tunnel:open &",
+    "start": "node -r dotenv/config lib/core/webhook.js",
+    "poststart": "yarn tunnel:close"
   },
   "repository": {
     "type": "git",
@@ -17,23 +25,24 @@
   },
   "homepage": "https://github.com/filipgolles/climate-action#readme",
   "dependencies": {
-    "actions-on-google": "^1.9.0",
-    "express": "^4.16.2",
-    "morgan": "^1.9.0",
-    "request": "^2.83.0"
+    "actions-on-google": "^1.10.0",
+    "debug": "^3.1.0",
+    "express": "^4.16.3",
+    "got": "^8.3.0",
+    "moment": "^2.22.0",
+    "natural": "^0.5.6"
   },
   "devDependencies": {
     "dotenv": "^5.0.1",
-    "eslint": "^4.18.1",
-    "eslint-config-skellyton": "^2.2.0"
+    "eslint": "^4.19.1",
+    "eslint-config-xo-space": "^0.18.0",
+    "supertest": "^3.0.0"
   },
   "eslintConfig": {
-    "extends": [
-      "skellyton/full"
-    ]
-  },
-  "eslintIgnore": [
-    "build/",
-    "dist/"
-  ]
+    "extends": "xo-space/esnext",
+    "rules": {
+      "capitalized-comments": 0,
+      "no-unused-vars": 1
+    }
+  }
 }
