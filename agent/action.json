@@ -52,7 +52,7 @@
   "conversations": {
     "hook": {
       "name": "hook",
-      "url": "https://climateactions.eu.ngrok.io/hook",
+      "url": "https://climate-actions.herokuapp.com/hook",
       "fulfillmentApiVersion": 2
     }
   },

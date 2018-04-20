@@ -4,10 +4,10 @@
   "description": "Enabling climate-friendly behavior through Actions on Google",
   "main": "lib/core/webhook.js",
   "scripts": {
-    "dev:perf": "DEBUG=dev:perf:* node -r dotenv/config lib/modules/present.js",
     "prep:agent":
       "./agent/gactions update --action_package ./agent/action.json --project climate-actions-87369",
     "prep:classifier": "node nlp/classifier.js",
+    "prep": "yarn prep:classifier && yarn prep:agent",
     "tunnel:open": "ngrok start -config ~/.ngrok2/ngrok.yml climate",
     "tunnel:close": "killall ngrok || true",
     "prestart": "yarn tunnel:open &",
